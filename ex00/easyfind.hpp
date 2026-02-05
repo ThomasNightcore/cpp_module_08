@@ -7,8 +7,8 @@
 template<typename T>
 typename T::iterator easyfind(T& container, int target)
 {
-	typename T::iterator iter, end;
-	for (iter = container.begin(), end = container.end(); iter != end; ++iter)
+	typename T::iterator iter;
+	for (iter = container.begin(); iter != container.end(); ++iter)
 	{
 		if (*iter == target)
 			return iter;
