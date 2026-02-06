@@ -26,13 +26,13 @@ int main(void)
 
 	std::cout << std::endl << " ======== Testing with deque ======== " << std::endl;
 	std::deque<int> queue = std::deque<int>();
-	for (int i = 0; i < 10; i++)
+	for (int i = 0; i < 100000; i++)
 		queue.push_back(i);
 	try 
 	{
-		std::vector<int>::iterator res = easyfind(vect, 5);
+		std::deque<int>::iterator res = easyfind(queue, 500);
 		std::cout << "found element " << *res << std::endl;
-		res = easyfind(vect, 50);
+		res = easyfind(queue, 89880);
 		std::cout << "found element " << *res << std::endl;
 	} 
 	catch (std::exception& ex)
@@ -42,13 +42,15 @@ int main(void)
 
 	std::cout << std::endl << " ======== Testing with list ======== " << std::endl;
 	std::list<int> list(10);
-	for (int i = 0; i < 10; i++)
-		queue.push_back(i);
+	for (int i = 0; i < 1000; i++)
+		list.push_back(i);
 	try 
 	{
-		std::vector<int>::iterator res = easyfind(vect, 5);
+		std::list<int>::iterator res = easyfind(list, 5);
 		std::cout << "found element " << *res << std::endl;
-		res = easyfind(vect, 50);
+		res = easyfind(list, 50);
+		std::cout << "found element " << *res << std::endl;
+		res = easyfind(list, 9000);
 		std::cout << "found element " << *res << std::endl;
 	} 
 	catch (std::exception& ex)
