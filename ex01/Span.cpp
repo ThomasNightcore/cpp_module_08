@@ -1,4 +1,5 @@
 #include "Span.hpp"
+#include <algorithm>
 #include <climits>
 #include <stdexcept>
 #include <vector>
@@ -42,6 +43,7 @@ void Span::addNumber(int number)
 	}
 
 	m_buffer.push_back(number);
+	std::sort(m_buffer.begin(), m_buffer.end());
 }
 
 int Span::shortestSpan(void) const
