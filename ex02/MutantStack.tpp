@@ -1,17 +1,19 @@
 
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack(void)
+	: std::stack<T, Container>::stack()
 {
 }
 
 template<typename T, typename Container>
 MutantStack<T, Container>::MutantStack(const MutantStack<T>& other)
+	: std::stack<T, Container>::stack(other)
 {
 	(void)other;
 }
 
 template<typename T, typename Container>
-MutantStack<T, Container>::~MutantStack(void)
+MutantStack<T, Container>::~MutantStack(void) 
 {
 }
 
