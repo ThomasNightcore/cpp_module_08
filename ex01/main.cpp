@@ -1,24 +1,92 @@
 
 #include "Span.hpp"
+#include <exception>
 #include <iostream>
 
-static void subjectTest(void)
-{
-	Span sp = Span(5);
+static void shortSpanTest(void) {
+    std::cout << " ==== Testing with double elements ==== " << std::endl;
 
-	sp.addNumber(6);
-	sp.addNumber(3);
-	sp.addNumber(17);
-	sp.addNumber(9);
-	sp.addNumber(11);
+    Span sp = Span(5);
+    try {
+        sp.addNumber(1);
+        sp.addNumber(0);
+        sp.addNumber(5);
+        sp.addNumber(5);
+        sp.addNumber(9);
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
 
-	std::cout << sp.shortestSpan() << std::endl;
-	std::cout << sp.longestSpan() << std::endl;
+    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << sp.longestSpan() << std::endl;
 }
 
-int main(void)
-{
-	subjectTest();
+static void subjectTest(void) {
+    std::cout << " ==== Testing with cases from subject ==== " << std::endl;
+    Span sp = Span(5);
 
-	return 0;
+    sp.addNumber(6);
+    sp.addNumber(3);
+    sp.addNumber(17);
+    sp.addNumber(9);
+    sp.addNumber(11);
+
+    std::cout << sp.shortestSpan() << std::endl;
+    std::cout << sp.longestSpan() << std::endl;
+}
+
+static void exceptionTests(void) {
+    std::cout << " ==== Testing with cases from subject ==== " << std::endl;
+    Span sp = Span(5);
+
+    std::cout << " * getting span with insufficient elements... " << std::endl;
+    try {
+        std::cout << sp.longestSpan() << std::endl;
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
+    try {
+        std::cout << sp.shortestSpan() << std::endl;
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
+
+    std::cout << " * adding one element..." << std::endl;
+    sp.addNumber(0);
+    try {
+        std::cout << sp.longestSpan() << std::endl;
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
+    try {
+        std::cout << sp.shortestSpan() << std::endl;
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
+
+    std::cout << " * adding one more element (should now work with 2)..."
+              << std::endl;
+    sp.addNumber(1);
+    std::cout << sp.longestSpan() << std::endl;
+    std::cout << sp.shortestSpan() << std::endl;
+
+    std::cout << " * inserting too many elements... " << std::endl;
+    try {
+        sp.addNumber(1);
+        sp.addNumber(2);
+        sp.addNumber(3);
+        sp.addNumber(4);
+        sp.addNumber(5);
+    } catch (std::exception &ex) {
+        std::cout << "Caught exception " << ex.what() << std::endl;
+    }
+}
+int main(void) {
+    exceptionTests();
+    std::cout << std::endl;
+    subjectTest();
+    std::cout << std::endl;
+    shortSpanTest();
+
+    return 0;
 }
