@@ -28,7 +28,9 @@ public:
             throw FullSpanException();
         }
 
-        std::for_each(from, to, &std::multiset<int>::insert);
+        while (from != to) {
+            m_set.insert(*from++);
+        }
     }
 
     class FullSpanException : public std::exception {

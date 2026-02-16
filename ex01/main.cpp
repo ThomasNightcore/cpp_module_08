@@ -2,20 +2,22 @@
 #include "Span.hpp"
 #include <exception>
 #include <iostream>
+#include <vector>
 
 static void shortSpanTest(void) {
     std::cout << " ==== Testing with double elements ==== " << std::endl;
 
+    std::vector<int> tmp;
+    tmp.push_back(1);
+    tmp.push_back(0);
+    tmp.push_back(5);
+    tmp.push_back(5);
+    tmp.push_back(9);
+    std::vector<int>::iterator from = tmp.begin();
+    std::vector<int>::iterator to = tmp.end();
+
     Span sp = Span(5);
-    try {
-        sp.addNumber(1);
-        sp.addNumber(0);
-        sp.addNumber(5);
-        sp.addNumber(5);
-        sp.addNumber(9);
-    } catch (std::exception &ex) {
-        std::cout << "Caught exception " << ex.what() << std::endl;
-    }
+    sp.assign(from, to);
 
     std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
     std::cout << "Longest span: " << sp.longestSpan() << std::endl;
@@ -81,12 +83,37 @@ static void exceptionTests(void) {
         std::cout << "Caught exception " << ex.what() << std::endl;
     }
 }
+
+static void bigSizeTest(void) {
+    std::srand(static_cast<unsigned int>(time(0)));
+    const int size = 10000;
+
+    std::cout << " ==== Testing with " << size
+              << " elements in Span ==== " << std::endl;
+
+    std::vector<int> tmp;
+    tmp.reserve(size);
+    for (int i = 0; i < size; i++) {
+        tmp.push_back(std::rand());
+    }
+
+    std::vector<int>::iterator from = tmp.begin();
+    std::vector<int>::iterator to = tmp.end();
+    Span sp = Span(size);
+    sp.assign(from, to);
+
+    std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
+    std::cout << "Longest span: " << sp.longestSpan() << std::endl;
+}
+
 int main(void) {
     exceptionTests();
     std::cout << std::endl;
     subjectTest();
     std::cout << std::endl;
     shortSpanTest();
+    std::cout << std::endl;
+    bigSizeTest();
 
     return 0;
 }
