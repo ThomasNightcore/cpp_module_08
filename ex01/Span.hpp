@@ -1,7 +1,6 @@
 #ifndef __SPAN_HPP__
 #define __SPAN_HPP__
 
-#include <algorithm>
 #include <set>
 
 class Span {

@@ -3,6 +3,7 @@
 #include <exception>
 #include <iostream>
 #include <vector>
+#include <cstdlib>
 
 static void shortSpanTest(void) {
     std::cout << " ==== Testing with double elements ==== " << std::endl;
